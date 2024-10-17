@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cashier Simulator</title>
+  <script src="/vue.js"></script>
+  <style>
+    body {
+      margin: 0;
+    }
+    table, tr, th, td {
+      border-collapse: collapse;
+    }
+    .app {
+      height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+    .top-nav {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      margin-bottom: 5px;
+    }
+    .top-nav .nav-item {
+      border-radius: 0;
+      border: none;
+      margin-right: 1px;
+      background-color: blue;
+      color: white
+    }
+    .main {
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+    }
+    .bill {
+      display: flex;
+      flex-direction: column;
+    }
+    .bill .item-list {
+      flex-grow: 1;
+      border: 1px solid gray;
+      overflow-y: auto;
+    }
+    .item-list table, .item-list table tr, .item-list table th, .item-list table td {
+      border: 1px solid black;
+    }
+    .item-list table th, .item-list table td {
+      padding: 2px;
+    }
+    .item-list thead tr {
+      background-color: blue;
+      color: white;
+    }
+    .bill .bill-total {
+      text-align: right;
+      color: rgb(88, 176, 232);
+      font-size: 2em;
+      margin: 5px;
+    }
+    .bill .bill-preview {
+      height: 200px;
+      border: 1px solid gray;
+      background-color: aquamarine;
+      overflow-y: scroll;
+      font-family: monospace;
+    }
+    .bill-preview p {
+      line-height: 1;
+      margin: 0;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin-left: 5px;
+      gap: 2px;
+    }
+    .buttons .menu {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .menu .menu-group {
+      display: grid;
+      gap: 2px;
+      grid-template-rows: repeat(8, 1fr);
+    }
+    .menu .menu-group.menu-group__2 {
+      grid-column: span 2;
+      grid-template-columns: 1fr 1fr;
+    }
+    .menu .menu-group.menu-group__3 {
+      grid-column: span 3;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .menu .menu-group.menu-group__4 {
+      grid-column: span 3;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .buttons .functions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(8, 1fr);
+      gap: 2px;
+    }
+    .tile-button {
+      display: block;
+      width: calc(100% - 2px);
+      border: 1px solid gray;
+      border-radius: 3px;
+      box-sizing: border-box;
+      height: calc(100% - 2px);
+      aspect-ratio: 1;
+    }
+    .grid-item-extend-x {
+      grid-column: span 2;
+    }
+    .grid-item-extend-x .tile-button {
+      aspect-ratio: 2;
+    }
+    .grid-item-extend-y {
+      grid-row: span 2;
+    }
+    .grid-item-extend-y .tile-button {
+      aspect-ratio: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="app">
+    <nav class="top-nav">
+      <button class="nav-item">TAP BEER</button>
+      <button class="nav-item">STUBBIES</button>
+      <button class="nav-item">SPIRITS LIQUEURS</button>
+      <button class="nav-item">RTD CIDER SNACKS</button>
+      <button class="nav-item">WINE</button>
+      <button class="nav-item">SOFT DRINK COFFEE</button>
+      <button class="nav-item">STARTERS SIDES</button>
+      <button class="nav-item">MAINS</button>
+      <button class="nav-item">SIGNATURES SALAD PASTA</button>
+      <button class="nav-item">SPECIAL DESSERTS KIDS</button>
+      <button class="nav-item">Table</button>
+      <button class="nav-item">Manager</button>
+    </nav>
+    <main class="main">
+      <div class="bill">
+        <div class="item-list">
+          <table>
+            <thead>
+              <tr>
+                <td>Qty</td>
+                <td>Description</td>
+                <td>Price A</td>
+                <td>ExtPrice</td>
+                <td>#</td>
+                <td>C</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="bill-total">
+          Total ({{ totalItem }}) ${{ totalPrice }}
+        </div>
+        <div class="bill-preview">
+          <pre>{{ prevBillContent }}</pre>
+        </div>
+      </div>
+      <div class="buttons">
+        <div class="menu">
+          <div
+            v-for="(group, groupIndex) in menu"
+            :class="`menu-group menu-group__${getMenuGroupColumn(group.length)}`"
+          >
+            <div
+              v-for="item in group"
+              :class="{ 'grid-item-extend-y': item.highlight }"
+            >
+              <button
+                class="menu-item tile-button"
+                :style="{
+                  background: `linear-gradient(white ,${getMenuColor(groupIndex)} 20%, ${getMenuColor(groupIndex)} 80%, white)`
+                }"
+              >
+                {{ item.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="functions">
+            <div><button class="tile-button">Search Beer SGL</button></div>
+            <div class="grid-item-extend-x"><button class="tile-button">Member Search</button></div>
+            <div><button class="tile-button">Seniors Discount</button></div>
+            <div><button class="tile-button">100</button></div>
+            <div><button class="tile-button">50</button></div>
+            <div><button class="tile-button">20</button></div>
+            <div><button class="tile-button">10</button></div>
+            <div><button class="tile-button">log off</button></div>
+            <div><button class="tile-button">hold sale</button></div>
+            <div><button class="tile-button">free text</button></div>
+            <div><button class="tile-button">reprint receipt</button></div>
+            <div><button class="tile-button">cancel item</button></div>
+            <div><button class="tile-button">cancel sale</button></div>
+            <div><button class="tile-button">refund (-)</button></div>
+            <div><button class="tile-button">search items</button></div>
+            <div><button class="tile-button">7</button></div>
+            <div><button class="tile-button">8</button></div>
+            <div><button class="tile-button">9</button></div>
+            <div><button class="tile-button">Charge to table</button></div>
+            <div><button class="tile-button">4</button></div>
+            <div><button class="tile-button">5</button></div>
+            <div><button class="tile-button">6</button></div>
+            <div><button class="tile-button">Other payment</button></div>
+            <div><button class="tile-button">1</button></div>
+            <div><button class="tile-button">2</button></div>
+            <div><button class="tile-button">3</button></div>
+            <div><button class="tile-button">EFTPOS</button></div>
+            <div><button class="tile-button">No sale</button></div>
+            <div><button class="tile-button">0</button></div>
+            <div><button class="tile-button">.</button></div>
+            <div><button class="tile-button">Cash</button></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+      data() {
+        return {
+          prevBill: {
+            receiptNumber: 208753,
+            itemList: [
+              {
+                qty: 1,
+                name: 'BOAGS STUB',
+                price: 7.5
+              }
+            ],
+            cash: 50,
+          },
+          menu: [
+            [
+              { name: 'WED STUB', price: 10 },
+              { name: 'VB STUBBIE', price: 10 },
+              { name: 'SUPERDRY STUB', price: 10 },
+              { name: 'CROWN STUB', price: 10 },
+              { name: 'TED STUB', price: 10 },
+              { name: 'GREAT NORTH STUB', price: 10 },
+              { name: 'BOAGS STUB', price: 10 },
+              { name: 'COOPERS SPARK', price: 10 },
+              { name: 'JS GOLDEN STUB', price: 10 },
+              { name: 'COOPERS PALE', price: 10 },
+              { name: 'JS HOP THIEF', price: 10 },
+            ],
+            [
+              { name: 'CORONA', price: 20 },
+              { name: 'HEINEKEN', price: 20, highlight: true },
+              { name: 'ASAHI STUBBIE', price: 20 },
+              { name: 'TSING TAO STUB', price: 20 },
+              { name: 'GUINESS CAN', price: 20 },
+            ],
+            [
+              { name: 'HAHN 3.5 STUB', price: 30 },
+              { name: 'XXXX STUB', price: 30 },
+              { name: 'IRON JACK', price: 30 },
+              { name: 'HAHN LIGHT', price: 30 },
+              { name: 'HEINEKEN ZERO', price: 30 },
+            ],
+          ]
+        }
+      },
+      computed: {
+        totalItem() {
+          return 0
+        },
+        totalPrice() {
+          return 0
+        },
+        prevBillContent() {
+          const total = this.getBillTotal(this.prevBill.itemList)
+          const totalString = ('$' + total.toFixed(2)).padStart(14)
+          const cashString = ('$' + this.prevBill.cash.toFixed(2)).padStart(14)
+          const change = this.prevBill.cash - total
+          const changeString = ('$' + change.toFixed(2)).padStart(14)
+
+          return `Receipt # ${this.prevBill.receiptNumber}\n` +
+            '\n' +
+            this.prevBill.itemList.map(item => {
+              const qty = item.qty.toFixed(2).padStart(5)
+              const description = item.name.length > 17
+                ? item.name.substr(0, 17)
+                : item.name.padEnd(17)
+              const price = ('$' + item.price.toFixed(2)).padStart(14)
+              return `${qty} x ${description} ${price}\n`
+            }).join('') +
+            '----------------------------------------\n' +
+            `                    TOTAL ${totalString}\n` +
+            `                     Cash ${cashString}\n` +
+            `              CASH CHANGE ${changeString}\n` +
+            '\n' +
+            'NO SALE'
+        },
+      },
+      methods: {
+        getBillTotal(itemList) {
+          return itemList.reduce((total, item) => total + item.price * item.qty, 0)
+        },
+        getMenuGroupColumn(len) {
+          return Math.ceil(len / 8)
+        },
+        getMenuColor(index) {
+          const colors = ['red', 'green', 'yellow']
+          if (index < colors.length) {
+            return colors[index]
+          }
+
+          return 'gray'
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

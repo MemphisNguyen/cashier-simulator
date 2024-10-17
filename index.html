@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cashier Simulator</title>
-  <script src="/vue.js"></script>
+  <script src="./vue.js"></script>
   <style>
     body {
       margin: 0;
@@ -15,7 +15,7 @@
     .app {
       height: 100vh;
       display: grid;
-      grid-template-rows: auto 1fr;
+      grid-template-rows: auto 1fr auto;
     }
     .top-nav {
       display: grid;
@@ -55,7 +55,7 @@
     .bill .bill-total {
       text-align: right;
       color: rgb(88, 176, 232);
-      font-size: 2em;
+      font-size: 1.3em;
       margin: 5px;
     }
     .bill .bill-preview {
@@ -64,6 +64,7 @@
       background-color: aquamarine;
       overflow-y: scroll;
       font-family: monospace;
+      padding: 5px;
     }
     .bill-preview p {
       line-height: 1;
@@ -111,6 +112,33 @@
       box-sizing: border-box;
       height: calc(100% - 2px);
       aspect-ratio: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .tile-button.number {
+      font-size: 2em;
+    }
+    .tile-button.function {
+      background: linear-gradient(white , rgb(81, 0, 255) 20%, rgb(81, 0, 255) 80%, white);
+      color: white;
+    }
+    .tile-button.search-sgl {
+      background: linear-gradient(white , deeppink , red, deeppink , white);
+    }
+    .tile-button.member-search {
+      background: orange;
+      color: blue;
+    }
+    .tile-button.senior-discount {
+      background: linear-gradient(white , rgb(255, 118, 191), white);
+    }
+    .tile-button.charge {
+      background: linear-gradient(white , rgb(162, 181, 255), white);
+      color: blue;
+    }
+    .tile-button.no-sale {
+      color: red;
     }
     .grid-item-extend-x {
       grid-column: span 2;
@@ -123,6 +151,17 @@
     }
     .grid-item-extend-y .tile-button {
       aspect-ratio: 0.5;
+    }
+    .status-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 5fr 4fr 10fr 10fr 4fr 1fr;
+      margin-top: 5px;
+      background: linear-gradient(lightblue, white);
+      gap: 2px;
+    }
+    .status-bar .status-cell{
+      padding: 3px 5px;
+      background: linear-gradient(white, lightblue);
     }
   </style>
 </head>
@@ -157,11 +196,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+              <tr v-for="item in currentBill.itemList">
+                <td>{{ item.qty }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.price * item.qty }}</td>
                 <td></td>
                 <td></td>
               </tr>
@@ -169,7 +208,7 @@
           </table>
         </div>
         <div class="bill-total">
-          Total ({{ totalItem }}) ${{ totalPrice }}
+          Total ({{ totalItem }}) ${{ totalPrice.toFixed(2) }}
         </div>
         <div class="bill-preview">
           <pre>{{ prevBillContent }}</pre>
@@ -190,6 +229,7 @@
                 :style="{
                   background: `linear-gradient(white ,${getMenuColor(groupIndex)} 20%, ${getMenuColor(groupIndex)} 80%, white)`
                 }"
+                @click="() => addItemToBill(item)"
               >
                 {{ item.name }}
               </button>
@@ -197,40 +237,50 @@
           </div>
         </div>
         <div class="functions">
-            <div><button class="tile-button">Search Beer SGL</button></div>
-            <div class="grid-item-extend-x"><button class="tile-button">Member Search</button></div>
-            <div><button class="tile-button">Seniors Discount</button></div>
-            <div><button class="tile-button">100</button></div>
-            <div><button class="tile-button">50</button></div>
-            <div><button class="tile-button">20</button></div>
-            <div><button class="tile-button">10</button></div>
-            <div><button class="tile-button">log off</button></div>
-            <div><button class="tile-button">hold sale</button></div>
-            <div><button class="tile-button">free text</button></div>
-            <div><button class="tile-button">reprint receipt</button></div>
-            <div><button class="tile-button">cancel item</button></div>
-            <div><button class="tile-button">cancel sale</button></div>
-            <div><button class="tile-button">refund (-)</button></div>
-            <div><button class="tile-button">search items</button></div>
-            <div><button class="tile-button">7</button></div>
-            <div><button class="tile-button">8</button></div>
-            <div><button class="tile-button">9</button></div>
-            <div><button class="tile-button">Charge to table</button></div>
-            <div><button class="tile-button">4</button></div>
-            <div><button class="tile-button">5</button></div>
-            <div><button class="tile-button">6</button></div>
-            <div><button class="tile-button">Other payment</button></div>
-            <div><button class="tile-button">1</button></div>
-            <div><button class="tile-button">2</button></div>
-            <div><button class="tile-button">3</button></div>
-            <div><button class="tile-button">EFTPOS</button></div>
-            <div><button class="tile-button">No sale</button></div>
-            <div><button class="tile-button">0</button></div>
-            <div><button class="tile-button">.</button></div>
-            <div><button class="tile-button">Cash</button></div>
+            <div><button class="tile-button search-sgl">Search Beer SGL</button></div>
+            <div class="grid-item-extend-x"><button class="tile-button member-search">Member Search</button></div>
+            <div><button class="tile-button senior-discount">Seniors Discount</button></div>
+            <div><button class="tile-button charge">100</button></div>
+            <div><button class="tile-button charge" style="background: url(./images/aud-50.jpg); background-size: 100% 100%; color: transparent">50</button></div>
+            <div><button class="tile-button charge" style="background: url(./images/aud-20.jpg); background-size: 100% 100%; color: transparent">20</button></div>
+            <div><button class="tile-button charge" style="background: url(./images/aud-10.jpg); background-size: 100% 100%; color: transparent">10</button></div>
+            <div><button class="tile-button function">log off</button></div>
+            <div><button class="tile-button function">hold sale</button></div>
+            <div><button class="tile-button function">free text</button></div>
+            <div><button class="tile-button function">reprint receipt</button></div>
+            <div><button class="tile-button function">cancel item</button></div>
+            <div><button class="tile-button function">cancel sale</button></div>
+            <div><button class="tile-button function">refund (-)</button></div>
+            <div><button class="tile-button function">search items</button></div>
+            <div><button class="tile-button number">7</button></div>
+            <div><button class="tile-button number">8</button></div>
+            <div><button class="tile-button number">9</button></div>
+            <div><button class="tile-button charge">Charge to table</button></div>
+            <div><button class="tile-button number">4</button></div>
+            <div><button class="tile-button number">5</button></div>
+            <div><button class="tile-button number">6</button></div>
+            <div><button class="tile-button charge">Other payment</button></div>
+            <div><button class="tile-button number">1</button></div>
+            <div><button class="tile-button number">2</button></div>
+            <div><button class="tile-button number">3</button></div>
+            <div><button class="tile-button charge">EFTPOS</button></div>
+            <div><button class="tile-button charge no-sale">No sale</button></div>
+            <div><button class="tile-button number">0</button></div>
+            <div><button class="tile-button number">.</button></div>
+            <div><button class="tile-button charge">Cash</button></div>
         </div>
       </div>
     </main>
+    <footer class="status-bar">
+      <div class="status-cell"></div>
+      <div class="status-cell"></div>
+      <div class="status-cell">{{ username }}</div>
+      <div class="status-cell">Hold: {{ holdingBill == null ? 0 : 1 }}/1</div>
+      <div class="status-cell"></div>
+      <div class="status-cell"></div>
+      <div class="status-cell">Online</div>
+      <div class="status-cell"></div>
+    </footer>
   </div>
   <script>
     const { createApp } = Vue
@@ -238,6 +288,7 @@
     createApp({
       data() {
         return {
+          username: 'Jack - 01',
           prevBill: {
             receiptNumber: 208753,
             itemList: [
@@ -249,6 +300,10 @@
             ],
             cash: 50,
           },
+          currentBill: {
+            itemList: {},
+          },
+          holdingBill: null,
           menu: [
             [
               { name: 'WED STUB', price: 10 },
@@ -282,10 +337,10 @@
       },
       computed: {
         totalItem() {
-          return 0
+          return Object.values(this.currentBill.itemList).length
         },
         totalPrice() {
-          return 0
+          return Object.values(this.currentBill.itemList).reduce((total, item) => total + item.price * item.qty, 0)
         },
         prevBillContent() {
           const total = this.getBillTotal(this.prevBill.itemList)
@@ -326,6 +381,23 @@
           }
 
           return 'gray'
+        },
+        addItemToBill(item) {
+          if (this.currentBill.itemList[item.name]) {
+            this.currentBill.itemList[item.name].qty++
+            this.currentBill.itemList = {
+              ...this.currentBill.itemList,
+            }
+          } else {
+            this.currentBill.itemList = {
+              ...this.currentBill.itemList,
+              [item.name]: {
+                qty: 1,
+                name: item.name,
+                price: item.price,
+              }
+            }
+          }
         }
       }
     }).mount('#app')

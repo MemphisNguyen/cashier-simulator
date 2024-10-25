@@ -14,7 +14,7 @@ const Main = defineComponent({
     HomeScreen,
   },
   data: () => ({
-    username: 'fdsfds',
+    username: '',
   }),
   computed: {
     appStore() {

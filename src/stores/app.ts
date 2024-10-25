@@ -1,0 +1,170 @@
+// Utilities
+import { defineStore } from 'pinia'
+
+type ClipboardTypes = 'Cash' | 'Amount' | ''
+
+export const useAppStore = defineStore('app', {
+  state: () => ({
+    currentBill: {
+      tableName: '',
+      itemList: {},
+    } as TableData,
+    selectedBillItem: null as string | null,
+    menu: {} as Record<string, MenuData[]>,
+    clipboard: {
+      type: '' as ClipboardTypes,
+      value: '',
+    },
+    tableList: {} as Record<string, TableData>,
+    accummulatedCash: 0,
+    voucherCharge: 0,
+    previousReceipt: [] as ReceiptData[],
+  }),
+  getters: {
+    totalCurrentBill(): number {
+      return Object.values(this.currentBill.itemList).reduce((acc, item) => acc + item.price * item.qty, 0)
+    },
+    eftposCharge(): number {
+      const remain = this.totalCurrentBill - this.voucherCharge - this.accummulatedCash
+
+      if (remain > 0) {
+        return remain
+      } else {
+        return 0
+      }
+    },
+    totalCharge(): number {
+      return this.voucherCharge + this.accummulatedCash + this.eftposCharge
+    }
+  },
+  actions: {
+    setCurrentBill(bill: typeof this.currentBill) {
+      this.currentBill = bill
+    },
+    setSelectedBillItem(item: typeof this.selectedBillItem) {
+      this.selectedBillItem = item
+    },
+    setMenu(menu: typeof this.menu) {
+      this.menu = menu
+    },
+    setClipboard(type: ClipboardTypes, value: string) {
+      if (type !== 'Cash') {
+        this.resetAccummulatedCash()
+      }
+
+      this.clipboard = {
+        type,
+        value,
+      }
+    },
+    clearClipboard() {
+      this.clipboard = {
+        type: '',
+        value: '',
+      }
+    },
+    addItemToCurrentBill(item: BillItem) {
+      if (this.currentBill.itemList[item.name]) {
+        this.currentBill.itemList[item.name].qty += item.qty
+        this.currentBill.itemList = {
+          ...this.currentBill.itemList,
+        }
+      } else {
+        this.currentBill.itemList = {
+          ...this.currentBill.itemList,
+          [item.name]: {
+            qty: item.qty,
+            name: item.name,
+            price: item.price,
+          }
+        }
+      }
+    },
+    getClipboardNumber(defaultValue?: number) {
+      return parseFloat(this.clipboard.value) || defaultValue || 0
+    },
+    removeSelectedItemFromCurrentBill() {
+      if (this.selectedBillItem) {
+        delete this.currentBill.itemList[this.selectedBillItem]
+        this.selectedBillItem = null
+      }
+    },
+    toggleSelectBillItem(item: BillItem) {
+      this.selectedBillItem = this.selectedBillItem === item.name ? null : item.name
+    },
+    setTable(data: Record<string, TableData>) {
+      this.tableList = data
+    },
+    addTable(tableName: string, items?: Record<string, BillItem>) {
+      this.tableList[tableName] = {
+        tableName,
+        itemList: items ?? {},
+      }
+    },
+    chargeToTable(tableName: string) {
+      if (this.currentBill.tableName) {
+        this.tableList[tableName].itemList = this.currentBill.itemList
+      } else {
+        this.tableList[tableName] = {
+          tableName,
+          itemList: Object.keys(this.currentBill.itemList).reduce(
+            (list, itemName) => {
+              if (list[itemName]) {
+                list[itemName].qty += this.currentBill.itemList[itemName].qty
+              } else {
+                list[itemName] = {
+                  qty: this.currentBill.itemList[itemName].qty,
+                  name: this.currentBill.itemList[itemName].name,
+                  price: this.currentBill.itemList[itemName].price,
+                }
+              }
+
+              return list
+            }, this.tableList[tableName].itemList),
+        }
+      }
+
+      this.currentBill = {
+        tableName: '',
+        itemList: {},
+      }
+    },
+    addCash(value: number) {
+      this.accummulatedCash += value
+    },
+    resetAccummulatedCash() {
+      this.accummulatedCash = 0
+    },
+    setVoucherCharge(value: number) {
+      this.voucherCharge = value
+    },
+    endSale() {
+      this.previousReceipt.unshift({
+        receiptNumber: (+(new Date())).toString(),
+        itemList: Object.values(this.currentBill.itemList),
+        cash: this.accummulatedCash,
+        voucher: this.voucherCharge,
+        eftpos: this.eftposCharge,
+        change: this.totalCharge - this.totalCurrentBill,
+      })
+      this.resetAccummulatedCash()
+      this.voucherCharge = 0
+
+      if (this.currentBill.tableName) {
+        this.removeTable(this.currentBill.tableName)
+      }
+
+      this.currentBill = {
+        tableName: '',
+        itemList: {},
+      }
+      this.clearClipboard()
+    },
+    setReceipt(data: ReceiptData[]) {
+      this.previousReceipt = data
+    },
+    removeTable(tableName: string) {
+      delete this.tableList[this.currentBill.tableName]
+    }
+  }
+})

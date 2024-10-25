@@ -1,0 +1,93 @@
+[
+  [
+    {
+      "name": "WED STUB",
+      "price": 10
+    },
+    {
+      "name": "VB STUBBIE",
+      "price": 10
+    },
+    {
+      "name": "SUPERDRY STUB",
+      "price": 10
+    },
+    {
+      "name": "CROWN STUB",
+      "price": 10
+    },
+    {
+      "name": "TED STUB",
+      "price": 10
+    },
+    {
+      "name": "GREAT NORTH STUB",
+      "price": 10
+    },
+    {
+      "name": "BOAGS STUB",
+      "price": 10
+    },
+    {
+      "name": "COOPERS SPARK",
+      "price": 10
+    },
+    {
+      "name": "JS GOLDEN STUB",
+      "price": 10
+    },
+    {
+      "name": "COOPERS PALE",
+      "price": 10
+    },
+    {
+      "name": "JS HOP THIEF",
+      "price": 10
+    }
+  ],
+  [
+    {
+      "name": "CORONA",
+      "price": 20
+    },
+    {
+      "name": "HEINEKEN",
+      "price": 20,
+      "highlight": true
+    },
+    {
+      "name": "ASAHI STUBBIE",
+      "price": 20
+    },
+    {
+      "name": "TSING TAO STUB",
+      "price": 20
+    },
+    {
+      "name": "GUINESS CAN",
+      "price": 20
+    }
+  ],
+  [
+    {
+      "name": "HAHN 3.5 STUB",
+      "price": 30
+    },
+    {
+      "name": "XXXX STUB",
+      "price": 30
+    },
+    {
+      "name": "IRON JACK",
+      "price": 30
+    },
+    {
+      "name": "HAHN LIGHT",
+      "price": 30
+    },
+    {
+      "name": "HEINEKEN ZERO",
+      "price": 30
+    }
+  ]
+]

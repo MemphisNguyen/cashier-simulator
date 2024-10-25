@@ -1,0 +1,30 @@
+[
+  {
+    "receiptNumber": 208753,
+    "itemList": [
+      {
+        "qty": 1,
+        "name": "BOAGS STUB",
+        "price": 7.5
+      }
+    ],
+    "voucher": 0,
+    "eftpos": 0,
+    "cash": 50,
+    "change": 42.5
+  },
+  {
+    "receiptNumber": 208753,
+    "itemList": [
+      {
+        "qty": 2,
+        "name": "Heineken",
+        "price": 20
+      }
+    ],
+    "voucher": 20,
+    "eftpos": 10,
+    "cash": 10,
+    "change": 0
+  }
+]

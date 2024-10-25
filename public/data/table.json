@@ -1,0 +1,32 @@
+{
+  "Table #1": {
+    "tableName": "Table #1",
+    "itemList": {
+      "Coca Cola": {
+        "qty": 1,
+        "name": "Coca Cola",
+        "price": 2
+      },
+      "Sprite": {
+        "qty": 1,
+        "name": "Sprite",
+        "price": 2
+      }
+    }
+  },
+  "Table #2": {
+    "tableName": "Table #2",
+    "itemList": {
+      "Gin": {
+        "qty": 1,
+        "name": "Gin",
+        "price": 10
+      },
+      "Whiskey": {
+        "qty": 1,
+        "name": "Whiskey",
+        "price": 10
+      }
+    }
+  }
+}

@@ -25,5 +25,6 @@ export default Buttons
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
   gap: var(--grid-gap);
+  aspect-ratio: 1;
 }
 </style>

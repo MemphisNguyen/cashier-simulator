@@ -24,33 +24,39 @@ table, tr, th, td {
 
 
 .tile-button {
-  display: block;
+  display: flex;
   width: 100%;
-  height: 100%;
-  border: 1px solid gray;
-  border-radius: 3px;
-  box-sizing: border-box;
-  aspect-ratio: 1;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-weight: bold;
-  background-color: #ededed;
+  justify-content: stretch;
+  align-items: stretch;
+  // aspect-ratio: 1;
+
+  button {
+    display: block;
+    width: 100%;
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #ededed;
+  }
 }
 
 .grid-item-extend-x {
   grid-column: span 2;
 
-  .tile-button {
-    aspect-ratio: 2;
-  }
+  // &.tile-button {
+  //   aspect-ratio: 2;
+  // }
 }
 
 .grid-item-extend-y {
   grid-row: span 2;
 
-  .tile-button {
-    aspect-ratio: 0.5;
-  }
+//   &.tile-button {
+//     aspect-ratio: 0.5;
+//   }
 }
 
 .v-dialog.popup-dialog {

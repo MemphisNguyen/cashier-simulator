@@ -2,8 +2,8 @@
   <div class="menu">
     <div v-for="(group, groupIndex) in quickAccess"
       :class="`menu-group menu-group__${getMenuGroupColumn(group.length)}`">
-      <div v-for="item in group" :class="{ 'grid-item-extend-y': item.highlight }">
-        <button class="menu-item tile-button" :style="{
+      <div v-for="item in group" :class="{ 'grid-item-extend-y': item.highlight }" class="tile-button">
+        <button class="menu-item" :style="{
           background: `linear-gradient(white ,${getMenuColor(groupIndex)} 20%, ${getMenuColor(groupIndex)} 80%, white)`
         }" @click="() => addItemToBill(item)">
           {{ item.name }}

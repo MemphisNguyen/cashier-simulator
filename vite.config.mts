@@ -12,8 +12,8 @@ import { defineConfig } from 'vite'
 import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  base: '/cashier-simulator/',
+export default ({ mode }) => defineConfig({
+  base: mode === 'production' ? '/cashier-simulator/' : '/',
   plugins: [
     VueRouter({
       dts: 'src/typed-router.d.ts',

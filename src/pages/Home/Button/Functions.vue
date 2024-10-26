@@ -1,11 +1,11 @@
 <template>
   <div class="functions">
-    <div><button class="tile-button search-sgl">Search Beer SGL</button></div>
-    <div class="grid-item-extend-x"><button class="tile-button member-search">Member Search</button></div>
-    <div><button class="tile-button senior-discount">Seniors Discount</button></div>
-    <div v-for="cashType in cashTypes">
+    <div class="tile-button"><button class="search-sgl">Search Beer SGL</button></div>
+    <div class="tile-button grid-item-extend-x"><button class="member-search">Member Search</button></div>
+    <div class="tile-button"><button class=" senior-discount">Seniors Discount</button></div>
+    <div v-for="cashType in cashTypes" class="tile-button">
       <button
-        class="tile-button charge"
+        class="charge"
         :style="cashType.image ? {
           background: cashType.image,
           backgroundSize: '100% 100%',
@@ -16,28 +16,28 @@
         {{ cashType.value }}
       </button>
     </div>
-    <div><button class="tile-button function" @click="logOff">log off</button></div>
-    <div><button class="tile-button function">hold sale</button></div>
-    <div><button class="tile-button function" @click="showAddNotePopup">free text</button></div>
-    <div><button class="tile-button function" @click="showPrintReceiptPopup">reprint receipt</button></div>
-    <div><button class="tile-button function" @click="cancelItem">cancel item</button></div>
-    <div><button class="tile-button function" @click="cancelSale">cancel sale</button></div>
-    <div><button class="tile-button function">refund (-)</button></div>
-    <div><button class="tile-button function">search items</button></div>
+    <div class="tile-button"><button class="function" @click="logOff">log off</button></div>
+    <div class="tile-button"><button class="function">hold sale</button></div>
+    <div class="tile-button"><button class="function" @click="showAddNotePopup">free text</button></div>
+    <div class="tile-button"><button class="function" @click="showPrintReceiptPopup">reprint receipt</button></div>
+    <div class="tile-button"><button class="function" @click="cancelItem">cancel item</button></div>
+    <div class="tile-button"><button class="function" @click="cancelSale">cancel sale</button></div>
+    <div class="tile-button"><button class="function">refund (-)</button></div>
+    <div class="tile-button"><button class="function">search items</button></div>
     <div class="number-cash-buttons">
       <div class="number-buttons">
-        <div v-for="num in [7, 8, 9, 4, 5, 6, 1, 2, 3]">
-          <button class="tile-button number" @click="() => appendToClipboard(num.toString())">{{ num }}</button>
+        <div v-for="num in [7, 8, 9, 4, 5, 6, 1, 2, 3]" class="tile-button">
+          <button class="number" @click="() => appendToClipboard(num.toString())">{{ num }}</button>
         </div>
-        <div><button class="tile-button charge no-sale" @click="isShowNoSalePopup = true">No sale</button></div>
-        <div><button class="tile-button number" @click="() => appendToClipboard('0')">0</button></div>
-        <div><button class="tile-button number" @click="() => appendToClipboard('.')">.</button></div>
+        <div class="tile-button"><button class="charge no-sale" @click="isShowNoSalePopup = true">No sale</button></div>
+        <div class="tile-button"><button class="number" @click="() => appendToClipboard('0')">0</button></div>
+        <div class="tile-button"><button class="number" @click="() => appendToClipboard('.')">.</button></div>
       </div>
       <div class="cash-buttons">
-        <div><button class="tile-button charge" @click="chargeToTable">Charge to table</button></div>
-        <div><button class="tile-button charge" @click="() => isShowVoucherPopup = true">Other payment</button></div>
-        <div><button class="tile-button charge" @click="() => isShowEFTPOS = true">EFTPOS</button></div>
-        <div><button class="tile-button charge" @click="chargeByCash">Cash</button></div>
+        <div class="tile-button"><button class="charge" @click="chargeToTable">Charge to table</button></div>
+        <div class="tile-button"><button class="charge" @click="() => isShowVoucherPopup = true">Other payment</button></div>
+        <div class="tile-button"><button class="charge" @click="() => isShowEFTPOS = true">EFTPOS</button></div>
+        <div class="tile-button"><button class="charge" @click="chargeByCash">Cash</button></div>
       </div>
     </div>
     <ChargeToTablePopup
@@ -221,34 +221,34 @@ export default Functions
 
 .tile-button {
 
-  &.number {
+  .number {
     font-size: 2em;
   }
 
-  &.function {
+  .function {
     background: linear-gradient(white, rgb(81, 0, 255) 20%, rgb(81, 0, 255) 80%, white);
     color: white;
   }
 
-  &.search-sgl {
+  .search-sgl {
     background: linear-gradient(white, deeppink, red, deeppink, white);
   }
 
-  &.member-search {
+  .member-search {
     background: orange;
     color: blue;
   }
 
-  &.senior-discount {
+  .senior-discount {
     background: linear-gradient(white, rgb(255, 118, 191), white);
   }
 
-  &.charge {
+  .charge {
     background: linear-gradient(white, rgb(162, 181, 255), white);
     color: blue;
   }
 
-  &.no-sale {
+  .no-sale {
     color: red;
   }
 }

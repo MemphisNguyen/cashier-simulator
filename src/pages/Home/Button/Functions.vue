@@ -52,7 +52,6 @@ import { useAppStore } from '@/stores/app'
 import EndSalePopup from '../EndSalePopup.vue'
 import AddNotePopup from '../AddNotePopup.vue'
 import ReceiptPopup from '../ReceiptPopup.vue'
-import NoSalePopup from '../NoSalePopup.vue'
 import NumberButtons from './NumberButtons.vue'
 import ChargeButtons from './ChargeButtons.vue'
 
@@ -61,7 +60,7 @@ const Functions = defineComponent({
   components: {
     AddNotePopup,
     ReceiptPopup,
-    NoSalePopup,
+    EndSalePopup,
     NumberButtons,
     ChargeButtons,
   },

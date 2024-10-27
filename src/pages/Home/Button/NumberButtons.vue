@@ -16,9 +16,13 @@
 <script lang="ts">
 import { useAppStore } from '@/stores/app'
 import { defineComponent } from 'vue'
+import NoSalePopup from '../NoSalePopup.vue'
 
 const NumberButtons = defineComponent({
   name: 'NumberButtons',
+  components: {
+    NoSalePopup,
+  },
   data: () => ({
     isShowNoSalePopup: false,
   }),

@@ -155,7 +155,7 @@ export default Functions
   gap: var(--grid-gap);
 }
 
-.tile-button { d
+.tile-button {
   .function {
     background: linear-gradient(white, rgb(81, 0, 255) 20%, rgb(81, 0, 255) 80%, white);
     color: white;

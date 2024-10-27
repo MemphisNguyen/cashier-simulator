@@ -1,0 +1,1 @@
+.buttons[data-v-e29af0d3]{display:grid;grid-template-rows:1fr;grid-template-columns:repeat(2,calc((100% - var(--grid-gap)) / 2));gap:var(--grid-gap);aspect-ratio:1}

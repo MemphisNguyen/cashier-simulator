@@ -5,7 +5,7 @@
       />
     <div class="wrapper">
       <Bill />
-      <Buttons />
+      <Buttons @logOff="$emit('logOff')"/>
     </div>
     <Footer :username="username" />
 

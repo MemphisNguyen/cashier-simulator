@@ -1,7 +1,7 @@
 <template>
   <div class="buttons">
     <QuickAccessMenu />
-    <Functions />
+    <Functions @logOff="$emit('logOff')" />
   </div>
 </template>
 <script lang="ts">

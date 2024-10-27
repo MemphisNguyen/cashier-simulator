@@ -1,0 +1,1 @@
+.number-buttons[data-v-cbe0e234]{display:grid;grid-template-columns:repeat(3,calc((100% - var(--grid-gap) * 2) / 3));grid-template-rows:repeat(4,calc((100% - var(--grid-gap) * 3) / 4));gap:var(--grid-gap)}.tile-button .number[data-v-cbe0e234]{font-size:2em}.tile-button .no-sale[data-v-cbe0e234]{color:red}

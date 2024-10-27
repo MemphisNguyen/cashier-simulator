@@ -1,0 +1,1 @@
+.cash-buttons[data-v-e3823504]{display:grid;grid-template-columns:1fr;grid-template-rows:repeat(4,calc((100% - var(--grid-gap) * 3) / 4));gap:var(--grid-gap)}.tile-button .function[data-v-e3823504]{background:linear-gradient(#fff,#5100ff 20%,#5100ff 80%,#fff);color:#fff}.tile-button .charge[data-v-e3823504]{background:linear-gradient(#fff,#a2b5ff,#fff);color:#00f}

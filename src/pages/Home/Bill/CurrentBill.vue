@@ -42,7 +42,7 @@ export default currentBill
 .current-bill {
   flex-grow: 1;
   border: 1px solid gray;
-  overflow-y: auto;
+  overflow: auto;
   padding: var(--grid-gap);
 }
 </style>

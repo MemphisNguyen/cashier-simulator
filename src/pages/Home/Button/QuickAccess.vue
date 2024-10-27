@@ -65,35 +65,21 @@ export default QuickAccessMenu
 <style lang="scss" scoped>
 .menu {
   display: grid;
-  grid-column: span 4;
-  grid-row: span 8;
-  grid-template-columns: subgrid;
-  grid-template-rows: subgrid;
+  grid-template-columns: repeat(4,calc((100% - var(--grid-gap) * 3) / 4));
+  grid-template-rows: 1fr;
   gap: var(--grid-gap);
 
   .menu-group {
     display: grid;
-    grid-row: span 8;
-    grid-template-rows: subgrid;
+    grid-template-rows: repeat(8, 1fr);
+    grid-template-columns: 100%;
     gap: var(--grid-gap);
 
-    &.menu-group__1 {
-      grid-template-columns: subgrid;
-    }
-
-    &.menu-group__2 {
-      grid-column: span 2;
-      grid-template-columns: subgrid;
-    }
-
-    &.menu-group__3 {
-      grid-column: span 3;
-      grid-template-columns: subgrid;
-    }
-
-    &.menu-group__4 {
-      grid-column: span 3;
-      grid-template-columns: subgrid;
+    @for $i from 2 through 4 {
+      &.menu-group__#{$i} {
+        grid-column-end: span 2;
+        grid-template-columns: repeat($i, calc(50% - var(--grid-gap) / $i));
+      }
     }
   }
 }

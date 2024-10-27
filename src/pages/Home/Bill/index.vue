@@ -53,7 +53,7 @@ export default Bill
     height: 200px;
     border: 1px solid gray;
     background-color: aquamarine;
-    overflow-y: scroll;
+    overflow: scroll;
     font-family: monospace;
     padding: 5px;
 

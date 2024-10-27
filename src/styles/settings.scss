@@ -11,6 +11,9 @@
 :root {
   --grid-gap: 5px;
 }
+// #app {
+//   min-width: 920px;
+// }
 
 body {
   font-size: 14px;
@@ -40,6 +43,7 @@ table, tr, th, td {
     cursor: pointer;
     font-weight: bold;
     background-color: #ededed;
+    overflow: hidden;
   }
 }
 

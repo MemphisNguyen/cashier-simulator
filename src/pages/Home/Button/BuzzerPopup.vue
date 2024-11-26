@@ -31,6 +31,7 @@
   </v-dialog>
 </template>
 <script lang="ts">
+import { useAppStore } from '@/stores/app'
 import { defineComponent } from 'vue'
 
 const BuzzerPopup = defineComponent({
@@ -44,6 +45,9 @@ const BuzzerPopup = defineComponent({
   data: () => ({
     number: 0,
   }),
+  computed: {
+    appStore: () => useAppStore()
+  },
   watch: {
     modelValue(value) {
       if (value) {
@@ -56,6 +60,7 @@ const BuzzerPopup = defineComponent({
       this.$emit('update:modelValue', value)
     },
     onSubmit() {
+      this.appStore.setCurrentBuzzer(this.number);
       this.$emit('update:modelValue', false)
     }
   }

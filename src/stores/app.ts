@@ -7,6 +7,7 @@ export const useAppStore = defineStore('app', {
   state: () => ({
     currentBill: {
       tableName: '',
+      buzzerNumber: undefined,
       itemList: {},
     } as TableData,
     selectedBillItem: null as string | null,
@@ -94,10 +95,11 @@ export const useAppStore = defineStore('app', {
     setTable(data: Record<string, TableData>) {
       this.tableList = data
     },
-    addTable(tableName: string, customerName: string, items?: Record<string, BillItem>) {
+    addTable(tableName: string, customerName: string, items?: Record<string, BillItem>, buzzerNumber?: number) {
       this.tableList[tableName] = {
         tableName,
         customerName,
+        buzzerNumber,
         itemList: items ?? {},
       }
     },
@@ -144,6 +146,7 @@ export const useAppStore = defineStore('app', {
     endSale() {
       this.previousReceipt.unshift({
         receiptNumber: (+(new Date())).toString(),
+        buzzerNumber: this.currentBill.buzzerNumber,
         itemList: Object.values(this.currentBill.itemList),
         cash: this.accummulatedCash,
         voucher: this.voucherCharge,
@@ -169,6 +172,9 @@ export const useAppStore = defineStore('app', {
     },
     removeTable(tableName: string) {
       delete this.tableList[this.currentBill.tableName]
+    },
+    setCurrentBuzzer(buzzerNumber: number) {
+      this.currentBill.buzzerNumber = buzzerNumber
     }
   }
 })

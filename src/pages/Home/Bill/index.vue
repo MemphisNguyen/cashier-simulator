@@ -5,6 +5,9 @@
       <div>Total ({{ totalItem }}) ${{ totalPrice.toFixed(2) }}</div>
       <div v-if="appStore.voucherCharge > 0">Other payment: ${{ appStore.voucherCharge.toFixed(2) }}</div>
       <div v-if="appStore.accummulatedCash > 0">Cash: ${{ appStore.accummulatedCash.toFixed(2) }}</div>
+      <div v-if="remain != totalPrice">
+        Remain: ${{ remain.toFixed(2) }}
+        </div>
     </div>
     <PreviousBill />
   </div>
@@ -31,6 +34,9 @@ const Bill = defineComponent({
     totalPrice() {
       return this.appStore.totalCurrentBill
     },
+    remain() {
+      return this.totalPrice - this.appStore.voucherCharge - this.appStore.accummulatedCash
+    }
   },
 })
 

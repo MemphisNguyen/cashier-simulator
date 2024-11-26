@@ -32,6 +32,7 @@
         <div class="receipt-details" v-if="selectedReceipt">
           <div class="receipt-details__content">
             <p><strong>Receipt #{{ selectedReceipt.receiptNumber }}</strong></p>
+            <p v-if="selectedReceipt.buzzerNumber != undefined">Buzzer #{{ selectedReceipt.buzzerNumber }}</p>
             <BillItemTable :items="mapToBillTableData(selectedReceipt.itemList)" />
             <table class="charge-info">
               <tbody>

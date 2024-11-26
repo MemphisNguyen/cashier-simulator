@@ -35,11 +35,13 @@ type QuickAccessData = QuickAccessGroup[]
 type TableData = {
   tableName: string,
   customerName: string,
+  buzzerNumber?: number,
   itemList: Record<string, BillItem>,
 }
 
 type ReceiptData = {
   receiptNumber: string,
+  buzzerNumber?: number,
   itemList: BillItem[],
   cash: number,
   voucher: number,

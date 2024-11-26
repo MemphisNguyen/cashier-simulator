@@ -1,8 +1,14 @@
 <template>
   <div class="current-bill">
-    <div>Table:
-        <span :class="{'text-disabled': currentBill.tableName === '' }">{{ currentBill.tableName || 'N/A' }}</span>
+    <div class="d-flex justify-space-between">
+      <div>
+          Table:
+          <span :class="{'text-disabled': currentBill.tableName === '' }">{{ currentBill.tableName || 'N/A' }}</span>
       </div>
+      <div v-if="currentBill.buzzerNumber != undefined">
+        Buzzer #: {{ currentBill.buzzerNumber }}
+      </div>
+    </div>
     <BillItemTable
       :items="currentBill.itemList"
       :selected-item="selectedBillItem"

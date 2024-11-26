@@ -43,6 +43,7 @@
             </div>
             <div class="table-bill" v-if="selectedTable">
               <div class="table-bill-items">
+                <div v-if="tableList[selectedTable].buzzerNumber != undefined">Buzzer #{{ tableList[selectedTable].buzzerNumber }}</div>
                 <BillItemTable v-if="selectedTable" :items="currentTableBill" />
               </div>
               <div class="table-bill-actions">

@@ -157,6 +157,7 @@ const Functions = defineComponent({
       this.appStore.setCurrentBill({
         tableName: '',
         customerName: '',
+        buzzerNumber: undefined,
         itemList: {},
       })
     },

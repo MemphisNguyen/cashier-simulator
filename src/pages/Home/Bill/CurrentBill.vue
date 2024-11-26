@@ -6,7 +6,7 @@
           <span :class="{'text-disabled': currentBill.tableName === '' }">{{ currentBill.tableName || 'N/A' }}</span>
       </div>
       <div v-if="currentBill.buzzerNumber != undefined">
-        Buzzer #: {{ currentBill.buzzerNumber }}
+        Buzzer #{{ currentBill.buzzerNumber }}
       </div>
     </div>
     <BillItemTable

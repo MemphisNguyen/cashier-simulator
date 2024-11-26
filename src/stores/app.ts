@@ -106,10 +106,15 @@ export const useAppStore = defineStore('app', {
     chargeToTable(tableName: string) {
       if (this.currentBill.tableName) {
         this.tableList[tableName].itemList = this.currentBill.itemList
+
+        if (this.currentBill.buzzerNumber != undefined) {
+          this.tableList[tableName].buzzerNumber = this.currentBill.buzzerNumber
+        }
       } else {
         this.tableList[tableName] = {
           tableName,
           customerName: this.tableList[tableName].customerName,
+          buzzerNumber: this.currentBill.buzzerNumber,
           itemList: Object.keys(this.currentBill.itemList).reduce(
             (list, itemName) => {
               if (list[itemName]) {

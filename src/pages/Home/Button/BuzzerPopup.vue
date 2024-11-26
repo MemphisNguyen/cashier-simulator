@@ -9,7 +9,7 @@
         <v-card-title>
           <div class="dialog-title__text">Buzzer</div>
           <div class="dialog-title__actions">
-            <v-btn class="btn-close" @click="$emit('close')">
+            <v-btn class="btn-close" @click="onChanged(false)">
               <v-icon icon="mdi-close"></v-icon>
             </v-btn>
           </div>
@@ -21,6 +21,7 @@
             type="number"
             placeholder=""
             inputmode="numeric"
+            :error-messages="message"
           />
         </v-card-text>
         <v-card-actions>
@@ -44,6 +45,7 @@ const BuzzerPopup = defineComponent({
   },
   data: () => ({
     number: 0,
+    message: '',
   }),
   computed: {
     appStore: () => useAppStore()
@@ -52,6 +54,7 @@ const BuzzerPopup = defineComponent({
     modelValue(value) {
       if (value) {
         this.number = 0
+        this.message = ''
       }
     }
   },
@@ -60,8 +63,14 @@ const BuzzerPopup = defineComponent({
       this.$emit('update:modelValue', value)
     },
     onSubmit() {
-      this.appStore.setCurrentBuzzer(this.number);
-      this.$emit('update:modelValue', false)
+      const buzzerNumber = parseInt(`${this.number}`)
+      
+      if (!Number.isNaN(buzzerNumber)) {
+        this.appStore.setCurrentBuzzer(buzzerNumber);
+        this.$emit('update:modelValue', false)
+      } else {
+        this.message = 'Not a valid number'
+      }
     }
   }
 })

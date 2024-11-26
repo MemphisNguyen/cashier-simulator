@@ -126,10 +126,11 @@ const SplitBillPopup = defineComponent({
           if (!firstBill) {
             firstBill = {
               tableName: `${tableName}.${order}`,
+              customerName: this.currentBill.customerName,
               itemList: billItems
             }
           }
-          this.appStore.addTable(`${tableName}.${order}`, billItems)
+          this.appStore.addTable(`${tableName}.${order}`, this.currentBill.customerName, billItems)
           order++
         }
       }

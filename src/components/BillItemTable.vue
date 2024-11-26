@@ -21,7 +21,10 @@
           </td>
           <td>
             <div><strong>{{ item.name }}</strong></div>
-            <div v-if="item.note">{{ item.note }}</div>
+            <ul class="option-list" v-if="item.variation">
+              <li v-for="variation in item.variation" :key="variation">{{ variation }}</li>
+            </ul>
+            <div v-if="item.note">Note: {{ item.note }}</div>
           </td>
           <td class="text-right">${{ item.price.toFixed(2) }}</td>
           <td class="text-right">{{ item.qty }}</td>
@@ -76,7 +79,7 @@ export default BillItemTable
 
     th,
     td {
-      padding: 5px;
+      padding: 0.5em;
     }
   }
 
@@ -97,5 +100,8 @@ export default BillItemTable
     background-color: cornflowerblue;
     color: white;
   }
+}
+.option-list {
+  margin-inline-start: 1em;
 }
 </style>

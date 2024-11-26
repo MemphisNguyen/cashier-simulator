@@ -60,16 +60,20 @@ const ChargeButtons = defineComponent({
         }
       }
     },
-    onChargeEFTPOSCompleted() {
+    onChargeEFTPOSCompleted(isSuccess: boolean) {
       this.isShowEFTPOS = false
-      const cashInput = this.appStore.getClipboardNumber(0)
+      if (isSuccess) {
+        const cashInput = this.appStore.getClipboardNumber(0)
 
-      if (cashInput > 0) {
-        this.appStore.addCash(cashInput)
+        if (cashInput > 0) {
+          this.appStore.addCash(cashInput)
+          this.appStore.clearClipboard()
+        }
+
+        this.isShowEndSalePopup = true
+      } else {
         this.appStore.clearClipboard()
       }
-
-      this.isShowEndSalePopup = true
     },
     endSale() {
       this.isShowEndSalePopup = true
@@ -79,9 +83,19 @@ const ChargeButtons = defineComponent({
       this.isShowEndSalePopup = false
     },
     chargeByCash() {
-      this.appStore.resetAccummulatedCash()
-      this.appStore.addCash(this.appStore.totalCurrentBill - this.appStore.voucherCharge)
-      this.endSale()
+      if (this.appStore.clipboard.value === '') {
+        this.appStore.resetAccummulatedCash()
+        this.appStore.addCash(this.appStore.totalCurrentBill - this.appStore.voucherCharge)
+  
+        this.endSale()
+      } else {
+        this.appStore.addCash(this.appStore.getClipboardNumber(0))
+        this.appStore.clearClipboard()
+
+        if (this.appStore.accummulatedCash + this.appStore.voucherCharge >= this.appStore.totalCurrentBill) {
+          this.endSale()
+        }
+      }
     },
   }
 })

@@ -4,19 +4,28 @@ type FolderMenuData = {
   image?: string,
   children: MenuData[]
 }
+type VariationOption = { name: string, price: number }
+type Variation = {
+  name: string,
+  options: VariationOption[],
+  required: boolean
+}
 type ItemMenuData = {
   type: 'item',
   name: string,
   image?: string,
   price: number,
+  variations: Variation[]
 }
 type MenuData = FolderMenuData | ItemMenuData
 type MenuItem = {
   name: string
+  image?: string
   price: number
 }
 type BillItem = MenuItem & {
   qty: number
+  variation?: string[]
   note?: string
 }
 
@@ -25,6 +34,7 @@ type QuickAccessData = QuickAccessGroup[]
 
 type TableData = {
   tableName: string,
+  customerName: string,
   itemList: Record<string, BillItem>,
 }
 

@@ -1,8 +1,9 @@
 <template>
   <div class="functions">
     <div class="actions">
-      <div class="tile-button"><button class="search-sgl">Search Beer SGL</button></div>
-      <div class="tile-button grid-item-extend-x"><button class="member-search">Member Search</button></div>
+      <div class="tile-button"><button class="search-sgl" @click="() => {openType = 'food'; isShowOpenItemPopup = true}">Open food</button></div>
+      <div class="tile-button"><button class="search-sgl" @click="() => {openType = 'beverage'; isShowOpenItemPopup = true}">Open beverage</button></div>
+      <div class="tile-button"><button class="member-search">Member Search</button></div>
       <div class="tile-button"><button class=" senior-discount">Seniors Discount</button></div>
       <div v-for="cashType in cashTypes" class="tile-button">
         <button
@@ -18,12 +19,12 @@
         </button>
       </div>
       <div class="tile-button"><button class="function" @click="logOff">log off</button></div>
-      <div class="tile-button"><button class="function">hold sale</button></div>
+      <div class="tile-button"><button class="function" @click="isShowCashOutPopup = true">Cash out</button></div>
       <div class="tile-button"><button class="function" @click="showAddNotePopup">free text</button></div>
       <div class="tile-button"><button class="function" @click="showPrintReceiptPopup">reprint receipt</button></div>
       <div class="tile-button"><button class="function" @click="cancelItem">cancel item</button></div>
       <div class="tile-button"><button class="function" @click="cancelSale">cancel sale</button></div>
-      <div class="tile-button"><button class="function">refund (-)</button></div>
+      <div class="tile-button"><button class="function" @click="isShowBuzzerPopup = true">Buzzer #</button></div>
       <div class="tile-button"><button class="function">search items</button></div>
     </div>
     
@@ -44,6 +45,22 @@
       v-model="isShowEndSalePopup"
       @close="clearCurrentSale"
     />
+    <OpenItemPopup
+      :type="openType"
+      v-model="isShowOpenItemPopup"
+      @submit="addOpenItem"
+    />
+    <CashOutPopup
+      v-model="isShowCashOutPopup"
+      @submit="() => {isShowCashOutPopup = false; isShowPosChargePopup = true }"
+    />
+    <PosChargePopup
+      v-model="isShowPosChargePopup"
+      @close="isShowPosChargePopup = false"
+    />
+    <BuzzerPopup
+      v-model="isShowBuzzerPopup"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -54,6 +71,10 @@ import AddNotePopup from '../AddNotePopup.vue'
 import ReceiptPopup from '../ReceiptPopup.vue'
 import NumberButtons from './NumberButtons.vue'
 import ChargeButtons from './ChargeButtons.vue'
+import OpenItemPopup from './OpenItemPopup.vue'
+import CashOutPopup from './CashOutPopup.vue'
+import PosChargePopup from '../PosChargePopup.vue'
+import BuzzerPopup from './BuzzerPopup.vue'
 
 const Functions = defineComponent({
   name: 'Functions',
@@ -63,11 +84,15 @@ const Functions = defineComponent({
     EndSalePopup,
     NumberButtons,
     ChargeButtons,
+    OpenItemPopup,
+    CashOutPopup,
+    PosChargePopup,
+    BuzzerPopup,
   },
   emits: ['logOff'],
   data: () => ({
     cashTypes: [
-      { value: 100 },
+      { value: 100, image: 'url(./images/aud-100.jpg)' },
       { value: 50, image: 'url(./images/aud-50.jpg)' },
       { value: 20, image: 'url(./images/aud-20.jpg)' },
       { value: 10, image: 'url(./images/aud-10.jpg)' },
@@ -75,6 +100,11 @@ const Functions = defineComponent({
     isShowAddNotePopup: false,
     isShowReceiptPopup: false,
     isShowEndSalePopup: false,
+    isShowOpenItemPopup: false,
+    openType: 'food' as 'food' | 'beverage',
+    isShowCashOutPopup: false,
+    isShowPosChargePopup: false,
+    isShowBuzzerPopup: false,
   }),
   computed: {
     appStore: () => useAppStore(),
@@ -126,9 +156,18 @@ const Functions = defineComponent({
     cancelSale() {
       this.appStore.setCurrentBill({
         tableName: '',
+        customerName: '',
         itemList: {},
       })
     },
+    addOpenItem(name: string, price: number) {
+      this.appStore.addItemToCurrentBill({
+        name,
+        price,
+        qty: 1,
+      })
+      this.isShowOpenItemPopup = false
+    }
   },
 })
 
@@ -140,6 +179,7 @@ export default Functions
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, calc(50% - var(--grid-gap) / 2));
   gap: var(--grid-gap);
+  height: var(--main-height);
 }
 
 .actions {

@@ -1,93 +1,31 @@
 [
   [
-    {
-      "name": "WED STUB",
-      "price": 10
-    },
-    {
-      "name": "VB STUBBIE",
-      "price": 10
-    },
-    {
-      "name": "SUPERDRY STUB",
-      "price": 10
-    },
-    {
-      "name": "CROWN STUB",
-      "price": 10
-    },
-    {
-      "name": "TED STUB",
-      "price": 10
-    },
-    {
-      "name": "GREAT NORTH STUB",
-      "price": 10
-    },
-    {
-      "name": "BOAGS STUB",
-      "price": 10
-    },
-    {
-      "name": "COOPERS SPARK",
-      "price": 10
-    },
-    {
-      "name": "JS GOLDEN STUB",
-      "price": 10
-    },
-    {
-      "name": "COOPERS PALE",
-      "price": 10
-    },
-    {
-      "name": "JS HOP THIEF",
-      "price": 10
-    }
+    { "name": "XXXX Gold schooner", "image": "images/beers/XXXX Gold.jpg", "price": 4.55},
+    { "name": "Toohey Extra Dry schooner", "image": "images/beers/Toohey Extra Dry.jpg", "price": 3.13},
+    { "name": "Great Northern Super Crisp schooner", "image": "images/beers/Great Northern Super Crisp.jpg", "price": 5.34},
+    { "name": "Victoria Bitter schooner", "image": "images/beers/Victoria Bitter.jpg", "price": 6.59},
+    { "name": "James Squire One Fifty Lashes Pale Ale schooner", "image": "images/beers/James Squire One Fifty Lashes Pale Ale.jpg", "price": 8.01},
+    { "name": "Iron Jack Full Strength Lager schooner", "image": "images/beers/Iron Jack Full Strength Lager.jpg", "price": 3.08},
+    { "name": "Hahn Super Dry 3.5 schooner", "image": "images/beers/Hahn Super Dry 3.5.jpg", "price": 10.25},
+    { "name": "Furphy Refreshing Ale schooner", "image": "images/beers/Furphy Refreshing Ale.jpg", "price": 2.03},
+    { "name": "Strongbow Cider Apple schooner", "image": "images/ciders/Strongbow Cider Apple.jpg", "price": 2.31},
+    { "name": "5 Seeds Crisp Apple Cider schooner", "image": "images/ciders/5 Seeds Crisp Apple Cider.jpg", "price": 7.46},
+    { "name": "Somersby Cider Apple schooner", "image": "images/ciders/Somersby Cider Apple.jpg", "price": 5.04}
   ],
   [
-    {
-      "name": "CORONA",
-      "price": 20
-    },
-    {
-      "name": "HEINEKEN",
-      "price": 20,
-      "highlight": true
-    },
-    {
-      "name": "ASAHI STUBBIE",
-      "price": 20
-    },
-    {
-      "name": "TSING TAO STUB",
-      "price": 20
-    },
-    {
-      "name": "GUINESS CAN",
-      "price": 20
-    }
+    { "name": "Jack Daniel & Coke RTD", "image": "images/rtds/Jack Daniel & Coke RTD.jpg", "price": 12.89},
+    { "name": "Jim Beam & Coke RTD", "image": "images/rtds/Jim Beam & Coke RTD.jpg", "price": 6.4},
+    { "name": "Canadian Club & Dry RTD", "image": "images/rtds/Canadian Club & Dry RTD.jpg", "price": 2.99},
+    { "name": "Sailor Jerry & Dry RTD", "image": "images/rtds/Sailor Jerry & Dry RTD.jpg", "price": 6.18},
+    { "name": "Smirnoff Ice RTD", "image": "images/rtds/Smirnoff Ice RTD.jpg", "price": 2.13}
+
   ],
   [
-    {
-      "name": "HAHN 3.5 STUB",
-      "price": 30
-    },
-    {
-      "name": "XXXX STUB",
-      "price": 30
-    },
-    {
-      "name": "IRON JACK",
-      "price": 30
-    },
-    {
-      "name": "HAHN LIGHT",
-      "price": 30
-    },
-    {
-      "name": "HEINEKEN ZERO",
-      "price": 30
-    }
+    { "type": "item", "name": "Jack Daniels 30ml", "image": "", "price": 3.3 },
+    { "type": "item", "name": "Jim Beam 30ml", "image": "", "price": 3.3 },
+    { "type": "item", "name": "Bundaberg 30ml", "image": "", "price": 3.3 },
+    { "type": "item", "name": "Smirnoff Vodka 30ml", "image": "", "price": 3.3 },
+    { "type": "item", "name": "Johnnie Walker Red 30ml", "image": "", "price": 3.3 },
+    { "type": "item", "name": "Gordon Gin 30ml", "image": "", "price": 3.3 }
   ]
 ]

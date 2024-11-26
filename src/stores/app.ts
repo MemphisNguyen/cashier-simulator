@@ -48,10 +48,6 @@ export const useAppStore = defineStore('app', {
       this.menu = menu
     },
     setClipboard(type: ClipboardTypes, value: string) {
-      if (type !== 'Cash') {
-        this.resetAccummulatedCash()
-      }
-
       this.clipboard = {
         type,
         value,
@@ -64,18 +60,21 @@ export const useAppStore = defineStore('app', {
       }
     },
     addItemToCurrentBill(item: BillItem) {
-      if (this.currentBill.itemList[item.name]) {
-        this.currentBill.itemList[item.name].qty += item.qty
+      const itemName = [item.name, ...(item.variation ?? [])].join('|')
+
+      if (this.currentBill.itemList[itemName]) {
+        this.currentBill.itemList[itemName].qty += item.qty
         this.currentBill.itemList = {
           ...this.currentBill.itemList,
         }
       } else {
         this.currentBill.itemList = {
           ...this.currentBill.itemList,
-          [item.name]: {
+          [itemName]: {
             qty: item.qty,
             name: item.name,
             price: item.price,
+            variation: item.variation,
           }
         }
       }
@@ -95,9 +94,10 @@ export const useAppStore = defineStore('app', {
     setTable(data: Record<string, TableData>) {
       this.tableList = data
     },
-    addTable(tableName: string, items?: Record<string, BillItem>) {
+    addTable(tableName: string, customerName: string, items?: Record<string, BillItem>) {
       this.tableList[tableName] = {
         tableName,
+        customerName,
         itemList: items ?? {},
       }
     },
@@ -107,6 +107,7 @@ export const useAppStore = defineStore('app', {
       } else {
         this.tableList[tableName] = {
           tableName,
+          customerName: this.tableList[tableName].customerName,
           itemList: Object.keys(this.currentBill.itemList).reduce(
             (list, itemName) => {
               if (list[itemName]) {
@@ -116,6 +117,7 @@ export const useAppStore = defineStore('app', {
                   qty: this.currentBill.itemList[itemName].qty,
                   name: this.currentBill.itemList[itemName].name,
                   price: this.currentBill.itemList[itemName].price,
+                  variation: this.currentBill.itemList[itemName].variation,
                 }
               }
 
@@ -126,6 +128,7 @@ export const useAppStore = defineStore('app', {
 
       this.currentBill = {
         tableName: '',
+        customerName: '',
         itemList: {},
       }
     },
@@ -156,6 +159,7 @@ export const useAppStore = defineStore('app', {
 
       this.currentBill = {
         tableName: '',
+        customerName: '',
         itemList: {},
       }
       this.clearClipboard()

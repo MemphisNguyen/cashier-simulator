@@ -9,7 +9,17 @@
 //   $color-pack: false
 // );
 :root {
-  --grid-gap: 5px;
+  --viewbox-width: min(100vw, 16 / 9 * 100vh);
+  --viewbox-height: min(100vh, 9 / 16 * 100vw);
+  --grid-gap: calc(0.005 * var(--viewbox-width));
+  --nav-height: 5em;
+  --footer-height: 2em;
+  --main-height: calc(
+    var(--viewbox-height)
+    - var(--nav-height)
+    - var(--footer-height)
+    - 2 * var(--grid-gap)
+  );
 }
 // #app {
 //   min-width: 920px;
@@ -25,13 +35,12 @@ table, tr, th, td {
   text-align: right;
 }
 
-
 .tile-button {
   display: flex;
   width: 100%;
   justify-content: stretch;
   align-items: stretch;
-  // aspect-ratio: 1;
+  font-size: 0.95em;
 
   button {
     display: block;
@@ -84,4 +93,7 @@ table, tr, th, td {
       min-width: unset;
     }
   }
+}
+.popup-dialog .v-card .v-card-text {
+  padding-top: 1em;
 }

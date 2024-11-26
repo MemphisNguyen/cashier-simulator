@@ -37,15 +37,12 @@ export default Footer
 </script>
 <style lang="scss" scoped>
 .status-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 5fr 4fr 10fr 10fr 4fr 1fr;
   margin-top: 5px;
   background: linear-gradient(lightblue, white);
   gap: 2px;
+  height: 2em;
 
   .status-cell {
     padding: 3px 5px;

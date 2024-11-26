@@ -40,6 +40,7 @@ export default Bill
 .bill {
   display: flex;
   flex-direction: column;
+  height: var(--main-height);
 
 
   .bill-total {
@@ -50,7 +51,7 @@ export default Bill
   }
 
   .bill-preview {
-    height: 200px;
+    height: 30%;
     border: 1px solid gray;
     background-color: aquamarine;
     overflow: scroll;

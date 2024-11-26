@@ -28,7 +28,7 @@ export default Buttons
   display: grid;
   // grid-template-rows: repeat(2, calc(50% - var(--grid-gap) / 2));
   grid-template-rows: 1fr;
-  grid-template-columns: repeat(2, calc((100% - var(--grid-gap)) / 2));
+  grid-template-columns: auto calc((var(--main-height)) / 2);
   gap: var(--grid-gap);
   aspect-ratio: 1;
 }

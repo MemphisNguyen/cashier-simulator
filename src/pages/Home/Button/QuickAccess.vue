@@ -1,12 +1,15 @@
 <template>
   <div class="menu">
-    <div v-for="(group, groupIndex) in quickAccess"
+    <div v-for="group in quickAccess"
       :class="`menu-group menu-group__${getMenuGroupColumn(group.length)}`">
       <div v-for="item in group" :class="{ 'grid-item-extend-y': item.highlight }" class="tile-button">
-        <button class="menu-item" :style="{
-          background: `linear-gradient(white ,${getMenuColor(groupIndex)} 20%, ${getMenuColor(groupIndex)} 80%, white)`
-        }" @click="() => addItemToBill(item)">
-          {{ item.name }}
+        <button
+          class="menu-item"
+          :class="{'with-image': item.image}"
+          @click="() => addItemToBill(item)"
+        >
+          <img v-if="item.image" :src="item.image" :alt="item.name" />
+          <template v-else>{{ item.name }}</template>
         </button>
       </div>
     </div>
@@ -52,6 +55,7 @@ const QuickAccessMenu = defineComponent({
         this.appStore.addItemToCurrentBill({
           ...item,
           qty,
+          variation: []
         })
       }
 
@@ -68,6 +72,8 @@ export default QuickAccessMenu
   grid-template-columns: repeat(4,calc((100% - var(--grid-gap) * 3) / 4));
   grid-template-rows: 1fr;
   gap: var(--grid-gap);
+  height: var(--main-height);
+  overflow: auto;
 
   .menu-group {
     display: grid;
@@ -80,6 +86,23 @@ export default QuickAccessMenu
         grid-column-end: span 2;
         grid-template-columns: repeat($i, calc(50% - var(--grid-gap) / $i));
       }
+    }
+  }
+
+  @each $i, $color in (1: coral, 2: lightgreen, 3: lightblue, 4: yellow, 5: orange) {
+    .menu-group:nth-child(6n+#{$i}) .menu-item:not(.with-image) {
+      background: linear-gradient(white, $color 30%, $color 70%, white);
+    }
+  }
+
+  .menu-item.with-image {
+    padding: 0;
+    background-color: #fff;
+
+    img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
     }
   }
 }

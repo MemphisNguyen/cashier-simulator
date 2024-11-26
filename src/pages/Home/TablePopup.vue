@@ -20,29 +20,25 @@
         <v-card-text>
           <div class="table-view">
             <div class="table-list">
-              <div class="add-table-form">
-                <v-text-field
-                  label="Table name"
-                  variant="outlined"
-                  hide-details
-                  density="compact"
-                  v-model="newTableName"
-                  style="background-color: white;"
-                />
-                <v-btn
-                  prepend-icon="mdi-plus"
-                  color="primary"
-                  @click="addTable"
-                >
-                  Add
-                </v-btn>
-              </div>
               <div
                 v-for="item in tableList"
                 :class="{ 'table-item': true, 'selected': selectedTable === item.tableName }"
                 @click="() => selectTable(item.tableName)"
               >
-                <div class="title">{{ item.tableName }}</div>
+                <div class="title">
+                  [{{ item.tableName }}]
+                  {{ item.customerName}}
+                </div>
+              </div>
+              <div class="p-2 text-center">
+                <v-btn
+                  variant="text"
+                  prepend-icon="mdi-plus"
+                  color="primary"
+                  @click="openAddNewTablePopup"
+                >
+                  Add new table
+                </v-btn>
               </div>
             </div>
             <div class="table-bill" v-if="selectedTable">
@@ -72,7 +68,7 @@ const TablePopup = defineComponent({
       default: false,
     },
   },
-  emits: ['update:modelValue', 'close'],
+  emits: ['update:modelValue', 'close', 'addNew'],
   data() {
     return {
       selectedTable: null as string | null,
@@ -111,11 +107,8 @@ const TablePopup = defineComponent({
     selectTable(tableName: string) {
       this.selectedTable = tableName
     },
-    addTable() {
-      if (this.newTableName) {
-        this.appStore.addTable(this.newTableName)
-        this.newTableName = ''
-      }
+    openAddNewTablePopup() {
+      this.$emit('addNew')
     },
     bringToHomeScreen() {
       if (this.selectedTable && this.tableList[this.selectedTable]) {

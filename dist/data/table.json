@@ -1,6 +1,7 @@
 {
   "Table #1": {
     "tableName": "Table #1",
+    "customerName": "Jane Doe",
     "itemList": {
       "Coca Cola": {
         "qty": 1,
@@ -15,6 +16,7 @@
     }
   },
   "Table #2": {
+    "customerName": "John Doe",
     "tableName": "Table #2",
     "itemList": {
       "Gin": {

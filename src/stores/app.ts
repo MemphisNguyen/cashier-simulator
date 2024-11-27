@@ -127,6 +127,7 @@ export const useAppStore = defineStore('app', {
                   name: this.currentBill.itemList[itemName].name,
                   price: this.currentBill.itemList[itemName].price,
                   variation: this.currentBill.itemList[itemName].variation,
+                  note: this.currentBill.itemList[itemName].note
                 }
               }
 

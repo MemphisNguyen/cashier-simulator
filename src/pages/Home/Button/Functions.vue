@@ -146,7 +146,8 @@ const Functions = defineComponent({
     },
     addNoteToItem(note: string) {
       if (this.appStore.selectedBillItem) {
-        this.appStore.currentBill.itemList[this.appStore.selectedBillItem].note = note
+        const oldNote = this.appStore.currentBill.itemList[this.appStore.selectedBillItem].note ?? ''
+        this.appStore.currentBill.itemList[this.appStore.selectedBillItem].note = oldNote +note + '\n'
         this.isShowAddNotePopup = false
       }
     },

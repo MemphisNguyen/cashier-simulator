@@ -24,7 +24,14 @@
             <ul class="option-list" v-if="item.variation">
               <li v-for="variation in item.variation" :key="variation">{{ variation }}</li>
             </ul>
-            <div v-if="item.note">Note: {{ item.note }}</div>
+            <div v-if="item.note">
+              <em>Note:</em>
+              <ul class="note-list">
+                <li v-for="note in item.note.trim().split('\n')" :key="note">
+                  {{ note }}
+                </li>
+              </ul>
+            </div>
           </td>
           <td class="text-right">${{ item.price.toFixed(2) }}</td>
           <td class="text-right">{{ item.qty }}</td>
@@ -104,6 +111,10 @@ export default BillItemTable
   }
 }
 .option-list {
+  margin-inline-start: 1em;
+}
+.note-list {
+  list-style:  '- ';
   margin-inline-start: 1em;
 }
 </style>

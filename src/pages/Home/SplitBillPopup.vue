@@ -15,7 +15,7 @@
             <BillItemTable
               :items="getItemByBillId(0)"
               :selected-item="selectedBillItem"
-              @selected="(item) => selectedBillItem = item.name"
+              @selected="(item) => selectedBillItem = getBillItemId(item)"
             />
           </div>
           <div class="split-bills">
@@ -26,7 +26,7 @@
                   <BillItemTable
                     :items="getItemByBillId(billId)"
                     :selected-item="selectedBillItem"
-                    @selected="(item) => selectedBillItem = item.name"
+                    @selected="(item) => selectedBillItem = getBillItemId(item)"
                   />
                 </div>
                 <div class="child-bill__actions">
@@ -46,6 +46,7 @@
 <script lang="ts">
 import { useAppStore } from '@/stores/app';
 import { defineComponent } from 'vue'
+import { getBillItemId } from '@/helpers/functions';
 
 const SplitBillPopup = defineComponent({
   name: 'SplitBillPopup',
@@ -94,7 +95,7 @@ const SplitBillPopup = defineComponent({
       return Object.values(this.billItems)
         .reduce((prev, item) => ({
           ...prev,
-          ...(item.bill === billId ? { [item.name]: item } : {})
+          ...(item.bill === billId ? { [getBillItemId(item)]: item } : {})
         }), {})
     },
     moveItemToBill(billId: number) {
@@ -120,6 +121,7 @@ const SplitBillPopup = defineComponent({
                 price: items[name].price,
                 qty: items[name].qty,
                 note: items[name].note,
+                variation: items[name].variation
               }
             }), {})
 
@@ -147,6 +149,7 @@ const SplitBillPopup = defineComponent({
       this.appStore.setCurrentBill(firstBill!)
       this.$emit('close')
     },
+    getBillItemId,
   }
 })
 

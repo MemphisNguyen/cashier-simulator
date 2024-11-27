@@ -1,4 +1,5 @@
 // Utilities
+import { getBillItemId } from '@/helpers/functions'
 import { defineStore } from 'pinia'
 
 type ClipboardTypes = 'Cash' | 'Amount' | ''
@@ -61,7 +62,7 @@ export const useAppStore = defineStore('app', {
       }
     },
     addItemToCurrentBill(item: BillItem) {
-      const itemName = [item.name, ...(item.variation ?? [])].join('|')
+      const itemName = getBillItemId(item)
 
       if (this.currentBill.itemList[itemName]) {
         this.currentBill.itemList[itemName].qty += item.qty
@@ -90,7 +91,8 @@ export const useAppStore = defineStore('app', {
       }
     },
     toggleSelectBillItem(item: BillItem) {
-      this.selectedBillItem = this.selectedBillItem === item.name ? null : item.name
+      const itemId = getBillItemId(item)
+      this.selectedBillItem = this.selectedBillItem === itemId ? null : itemId
     },
     setTable(data: Record<string, TableData>) {
       this.tableList = data

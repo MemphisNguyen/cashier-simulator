@@ -68,6 +68,7 @@
   </v-dialog>
 </template>
 <script lang="ts">
+import { getBillItemId } from '@/helpers/functions';
 import { useAppStore } from '@/stores/app';
 import { defineComponent } from 'vue'
 
@@ -103,7 +104,7 @@ const ReceiptPopup = defineComponent({
     mapToBillTableData(itemList: BillItem[]) {
       return itemList.reduce((prev, item) => ({
         ...prev,
-        [item.name]: item
+        [getBillItemId(item)]: item
       }), {})
     }
   },

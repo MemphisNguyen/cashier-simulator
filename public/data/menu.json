@@ -550,7 +550,7 @@
             {"type": "item", "name": "D'Arenburg Footbolt Shiraz - bottle", "image": "", "price": 43},
             {"type": "item", "name": "Pepperjack Shiraz - bottle", "image": "", "price": 43},
             {"type": "item", "name": "Squealing Pig Pinot Noir - bottle", "image": "", "price": 45},
-            {"type": "item", "name": "Josef Chromy Pepik Pinot Noir - bottle", "image": "", "price " : 36}
+            {"type": "item", "name": "Josef Chromy Pepik Pinot Noir - bottle", "image": "", "price" : 36}
           ]
         }
       ]
@@ -613,7 +613,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -668,7 +668,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -723,7 +723,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -778,7 +778,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -833,7 +833,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -888,7 +888,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -943,7 +943,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -998,7 +998,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -1053,7 +1053,7 @@
             {
               "name": "Coffee amount",
               "options": [
-                {"name": "Double shot", "price": 0},
+                {"name": "Double shot", "price": 2},
                 {"name": "Half shot", "price": 0}
               ]
             },
@@ -1250,7 +1250,10 @@
                 {"name": "Scotch Fillet", "price": 8},
                 {"name": "Wagyu", "price": 10},
                 {"name": "T-bone", "price": 6},
-                {"name": "Rump", "price": 0}
+                {"name": "Rump", "price": 0},
+                {"name": "Rib eye", "price": 3},
+                {"name": "Striploin", "price": 4},
+                {"name": "Tenderloin", "price": 8}
               ],
               "required": true
             },

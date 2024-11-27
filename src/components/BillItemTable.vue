@@ -11,12 +11,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.name" :class="{
-          'selected': item.name === selectedItem
+        <tr v-for="item in items" :key="getBillItemId(item)" :class="{
+          'selected': getBillItemId(item) === selectedItem
         }" @click="() => selectItem(item)">
           <td v-if="hasSelectHandle" class="text-center">
             <div class="d-flex justify-center align-center">
-              <input type="radio" :value="item.name" v-model="selectedItem" />
+              <input type="radio" :value="getBillItemId(item)" :checked="getBillItemId(item) === selectedItem" />
             </div>
           </td>
           <td>
@@ -35,6 +35,7 @@
   </div>
 </template>
 <script lang="ts">
+import { getBillItemId } from '@/helpers/functions';
 import { defineComponent } from 'vue'
 
 const BillItemTable = defineComponent({
@@ -60,7 +61,8 @@ const BillItemTable = defineComponent({
   methods: {
     selectItem(item: BillItem) {
       this.$emit('selected', item)
-    }
+    },
+    getBillItemId,
   }
 })
 

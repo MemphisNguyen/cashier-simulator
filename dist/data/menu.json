@@ -611,6 +611,13 @@
           "type": "item", "name": "Short Black", "image": "", "price": 5,
           "variations": [
             {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
+            {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
               "required": false
@@ -658,6 +665,13 @@
         {
           "type": "item", "name": "Long Black", "image": "", "price": 5,
           "variations": [
+            {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
             {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
@@ -707,6 +721,13 @@
           "type": "item", "name": "Flat White", "image": "", "price": 5,
           "variations": [
             {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
+            {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
               "required": false
@@ -754,6 +775,13 @@
         {
           "type": "item", "name": "Latte", "image": "", "price": 5,
           "variations": [
+            {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
             {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
@@ -803,6 +831,13 @@
           "type": "item", "name": "Cappuccino", "image": "", "price": 5,
           "variations": [
             {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
+            {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
               "required": false
@@ -850,6 +885,13 @@
         {
           "type": "item", "name": "Hot Chocolate", "image": "", "price": 5,
           "variations": [
+            {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
             {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
@@ -899,6 +941,13 @@
           "type": "item", "name": "Mocha", "image": "", "price": 5,
           "variations": [
             {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
+            {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
               "required": false
@@ -947,6 +996,13 @@
           "type": "item", "name": "Chai Latte", "image": "", "price": 5,
           "variations": [
             {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
+            {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
               "required": false
@@ -994,6 +1050,13 @@
         {
           "type": "item", "name": "Dirty Chai Latte", "image": "", "price": 5,
           "variations": [
+            {
+              "name": "Coffee amount",
+              "options": [
+                {"name": "Double shot", "price": 0},
+                {"name": "Half shot", "price": 0}
+              ]
+            },
             {
               "name": "Milk",
               "options": [{"name": "Almond milk", "price": 0}, {"name": "Skim Milk", "price": 0}, {"name": "Soy Milk", "price": 0}, {"name": "Oats Milk", "price": 0}, {"name": "Lactose Free Milk", "price": 0}],
